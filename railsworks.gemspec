@@ -8,10 +8,10 @@ Gem::Specification.new do |spec|
   spec.version       = Railsworks::VERSION
   spec.authors       = ["Kurt Nelson"]
   spec.email         = ["kurtisnelson@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.summary       = %q{Useful rake tasks for apps deployed with OpsWorks}
+  spec.description   = %q{Console and deploy task for OpsWorks}
+  spec.homepage      = "https://github.com/kurtisnelson/railsworks"
+  spec.license       = "GPL"
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
