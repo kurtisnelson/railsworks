@@ -1,4 +1,10 @@
 # Railsworks
+[![Build Status](https://secure.travis-ci.org/kurtisnelson/railsworks.png)](http://travis-ci.org/kurtisnelson/railsworks)
+[![Gem Version](https://badge.fury.io/rb/railsworks.png)](http://badge.fury.io/rb/railsworks)
+[![Code Climate](https://codeclimate.com/github/kurtisnelson/railsworks.png)](https://codeclimate.com/github/kurtisnelson/railsworks)
+[![Coverage Status](https://coveralls.io/repos/kurtisnelson/railsworks/badge.svg)](https://coveralls.io/r/kurtisnelson/railsworks)
+[![Dependency Status](https://gemnasium.com/kurtisnelson/railsworks.png)](https://gemnasium.com/kurtisnelson/railsworks)
+[Documentation](http://rubydoc.info/gems/railsworks/)
 
 Useful rake tasks for rails apps deployed via Amazon OpsWorks
 
