@@ -1,6 +1,6 @@
 # Railsworks
 
-TODO: Write a gem description
+Useful rake tasks for rails apps deployed via Amazon OpsWorks
 
 ## Installation
 
@@ -18,9 +18,31 @@ Or install it yourself as:
 
     $ gem install railsworks
 
+Import the tasks by adding a line to your Rakefile:
+
+```ruby
+require 'railsworks/tasks'
+```
+
+Create `config/opsworks.yml` with the IDs from OpsWorks
+
+```
+production:
+   us-east-1:
+     stack_id: "84b1f7e9-bf0a-4c22-8bd9-e95b77347017"
+     layer_id: "648680a9-a124-47b5-a05d-9db89f94147d"
+     app_id: "997aaf39-f92e-4f6e-884a-f4a7534e84a3"
+```
+
 ## Usage
 
-TODO: Write usage instructions here
+To deploy to your production environment with migrations
+
+    $ rake deploy:production
+
+To open a rails console on production
+
+    $ rake console:production
 
 ## Contributing
 
