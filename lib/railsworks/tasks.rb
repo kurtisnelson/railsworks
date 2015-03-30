@@ -6,6 +6,7 @@ module Railsworks
     def install_tasks
       load 'railsworks/tasks/deploy.rake'
       load 'railsworks/tasks/console.rake'
+      load 'railsworks/tasks/rollbar.rake'
     end
   end
 end
