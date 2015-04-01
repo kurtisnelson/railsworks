@@ -8,17 +8,18 @@ namespace :console do
   task :staging do
     regions = YAML.load_file('config/opsworks.yml')['staging']
     ip = get_ip(regions)
-    path = '/srv/www/bouncer/current'
-    run_interactively("SEGMENT_KEY='' bundle exec rails console --environment=production", ip, path)
+    path = '/srv/www/' + get_name(regions) + '/current'
+    environment = setup_environment(regions)
+    run_interactively("#{environment} bundle exec rails console --environment=production", ip, path)
   end
 
   desc "Connecting to production console"
   task :production do
     regions = YAML.load_file('config/opsworks.yml')['production']
     ip = get_ip(regions)
-    # Change myapp to your app name
-    path = '/srv/www/bouncer/current'
-    run_interactively("SEGMENT_KEY='' bundle exec rails console --environment=production", ip, path)
+    path = '/srv/www/' + get_name(regions) + '/current'
+    environment = setup_environment(regions)
+    run_interactively("#{environment} bundle exec rails console --environment=production", ip, path)
   end
 
   def get_ip(regions)
@@ -32,6 +33,25 @@ namespace :console do
       break
     end
     ip
+  end
+
+  def setup_environment(regions)
+    cmd = []
+    regions.each do |region, value|
+      client = Aws::OpsWorks::Client.new(region: region)
+      env = client.describe_apps({app_ids: [value['app_id']]})[0][0].environment
+      env.each do |v|
+        cmd << v.key+'="'+v.value+'"' unless v.secure
+      end
+    end
+    cmd.join ' '
+  end
+
+  def get_name(regions)
+    regions.each do |region, value|
+      client = Aws::OpsWorks::Client.new(region: region)
+      return client.describe_apps({app_ids: [value['app_id']]})[0][0].shortname
+    end
   end
 
   def run_interactively(command, server, path)
