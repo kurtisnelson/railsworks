@@ -23,16 +23,17 @@ namespace :console do
   end
 
   def get_ip(regions)
-    ip = false
     regions.each do |region, value|
       client = Aws::OpsWorks::Client.new(region: region)
       client.describe_instances({layer_id: value['layer_id']}).each do |page|
-        ip = page.instances[0].public_ip
+        page.instances.each do |instance|
+          return instance.public_ip if instance.status == "online"
+        end
         break
       end
       break
     end
-    ip
+    raise "Could not find online instance"
   end
 
   def setup_environment(regions)
