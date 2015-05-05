@@ -56,6 +56,7 @@ namespace :console do
   end
 
   def run_interactively(command, server, path)
+    server = ENV['AWS_USERNAME'] + "@" + server if ENV['AWS_USERNAME']
     exec %Q(ssh #{server} -t 'cd #{path} && sudo #{command}') if server && path
   end
 end
