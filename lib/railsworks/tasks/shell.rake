@@ -9,7 +9,7 @@ namespace :shell do
     regions = YAML.load_file('config/opsworks.yml')['staging']
     ip = get_ip(regions)
     path = '/srv/www/' + get_name(regions) + '/current'
-    run_interactively(ip, path)
+    run_shell(ip, path)
   end
 
   desc "Connecting to production console"
@@ -17,7 +17,7 @@ namespace :shell do
     regions = YAML.load_file('config/opsworks.yml')['production']
     ip = get_ip(regions)
     path = '/srv/www/' + get_name(regions) + '/current'
-    run_interactively(ip, path)
+    run_shell(ip, path)
   end
 
   def get_ip(regions)
@@ -41,8 +41,8 @@ namespace :shell do
     end
   end
 
-  def run_interactively(server, path)
+  def run_shell(server, path)
     server = ENV['AWS_USERNAME'] + "@" + server if ENV['AWS_USERNAME']
-    exec %Q(ssh #{server} -t 'cd #{path}')  if server && path
+    exec %Q(ssh #{server})  if server && path
   end
 end
