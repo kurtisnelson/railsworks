@@ -4,6 +4,7 @@ module Railsworks
   class Tasks
     include Rake::DSL if defined? Rake::DSL
     def install_tasks
+      load 'railsworks/tasks/shell.rake'
       load 'railsworks/tasks/deploy.rake'
       load 'railsworks/tasks/console.rake'
       load 'railsworks/tasks/rollbar.rake'
